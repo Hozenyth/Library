@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Library.Api.Models;
+using Library.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -8,25 +9,33 @@ namespace Library.Api.Controllers
     [Route("api/Library")]
     public class LibraryController : ControllerBase
     {
-        
+
+        private readonly IBookService _bookservice;
+        public LibraryController(IBookService bookService) 
+        {
+            _bookservice = bookService;
+
+        }
+
+
         [HttpGet] 
         public IActionResult GetBooks( string query)
         {
-            //buscar todos os livros
-            return Ok();
+            var books = _bookservice.GetBooks(query);
+            
+            return Ok(books);
         }
+     
 
-      
-        [HttpGet("{id}")]
-        public IActionResult GetBookById(int id)
-        {
-            return Ok();
-        }
-       
         [HttpGet("{isbn}")]
-        public IActionResult GetBookByIsbn(int isbn)
+        public IActionResult GetBookByIsbn(string isbn)
         {
-            return Ok();
+            var book = _bookservice.GetByIsbn(isbn);
+            
+            if(book == null)              
+                return NotFound();
+            
+            return Ok(book);
         }
 
          [HttpPost]
@@ -54,7 +63,7 @@ namespace Library.Api.Controllers
             return NoContent();
         }
 
-       // [Route("api/DeleteBook")]
+      
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {

@@ -6,9 +6,14 @@
 
         Unpublished = 1,
 
-        Borrowed = 2,
+        Loan = 2,
 
-        Available = 3
+        Available = 3,
 
+        Canceled = 4,
+
+        Delivery = 5,
+
+        Deleted = 6
     }
 }

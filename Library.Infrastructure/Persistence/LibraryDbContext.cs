@@ -8,7 +8,7 @@ namespace Library.Infrastructure.Persistence
     {
         public List<Book> Books { get; set; }
         public List<User> Users { get; set; }
-        public List<BorrowedBooks> Borroweds { get; set; }
+        public List<LoanBooks> LoanBooks { get; set; }
 
         public LibraryDbContext()
         {
@@ -27,9 +27,9 @@ namespace Library.Infrastructure.Persistence
 
             };
 
-            Borroweds = new List<BorrowedBooks>
+            LoanBooks = new List<LoanBooks>
             {
-                new BorrowedBooks(2, "1840227931")
+                new LoanBooks(2, "1840227931")
             };
         }
     }

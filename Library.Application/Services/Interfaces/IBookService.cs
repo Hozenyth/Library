@@ -10,12 +10,14 @@ namespace Library.Application.Services.Interfaces
     public interface IBookService
     {
         List<BookViewModel> GetBooks( string query);
-        BookDetailsViewModel GetById(int id);
+      
+        BookDetailsViewModel GetByIsbn(string isbn);
 
         int Create(NewBookInputModel inputModel);
 
-        void Update(UpdateBookInputModel inputModel);
+        void Update(UpdateBookInputModel inputModel);     
         void Delete(int id);
-              
+        void Delivery(int id);
+        void LoanStart(int id);              
     }
 }

@@ -1,6 +1,9 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Library.Api.Validators;
+using Library.Application.Services.Implementations;
+using Library.Application.Services.Interfaces;
+using Library.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +39,8 @@ namespace Library.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library.Api", Version = "v1" });
 
             });
+            services.AddSingleton<LibraryDbContext>();
+            services.AddScoped<IBookService, BookService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
