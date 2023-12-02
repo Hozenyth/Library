@@ -3,6 +3,7 @@ using Library.Api.Models;
 using Library.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace Library.Api.Controllers
 {
@@ -27,7 +28,7 @@ namespace Library.Api.Controllers
         }
      
 
-        [HttpGet("{isbn}")]
+        [HttpGet("{isbn}")]       
         public IActionResult GetBookByIsbn(string isbn)
         {
             var book = _bookservice.GetByIsbn(isbn);
@@ -38,7 +39,18 @@ namespace Library.Api.Controllers
             return Ok(book);
         }
 
-         [HttpPost]
+
+        [HttpGet("{id:int}", Name = "GetOtherById")]
+        public IActionResult GetBookById(int id)
+        {
+            var book = _bookservice.GetBookById(id);
+
+            if (book == null)
+                return NotFound();
+
+            return Ok(book);
+        }
+        [HttpPost]
         public IActionResult CreateBook([FromBody] CreateBookModel createBook, [FromServices] IValidator<CreateBookModel> validator )
         {
 

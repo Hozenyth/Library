@@ -38,6 +38,26 @@ namespace Library.Application.Services.Implementations
             book.Finish();
         }
 
+        public BookDetailsViewModel GetBookById(int id)
+        {
+            var book = _dbContext.Books.SingleOrDefault(x => x.Id == id);
+
+            if (book == null)
+                return null;
+
+            var bookDetailsViewModel = new BookDetailsViewModel(
+                book.Id,
+                book.Title,
+                book.Author,
+                book.Isbn,
+                book.Year,
+                book.Status
+
+                );
+
+            return bookDetailsViewModel;
+        }
+
         public List<BookViewModel> GetBooks(string query)
         {
             var books = _dbContext.Books;

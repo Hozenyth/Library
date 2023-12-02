@@ -12,6 +12,7 @@ namespace Library.Application.Services.Interfaces
         List<BookViewModel> GetBooks( string query);
       
         BookDetailsViewModel GetByIsbn(string isbn);
+        BookDetailsViewModel GetBookById(int id);
 
         int Create(NewBookInputModel inputModel);
 
